@@ -1,1 +1,40 @@
+pipeline {
+    environment {
 
+ 
+
+    }
+	agent {
+        dockerfile {
+            additionalBuildArgs '--build-arg PROXY=http://web-proxy.corp.hpecorp.net:8080'
+        }
+
+	}
+
+	stages {
+        stage('GitCheckout') {
+            steps {
+                checkout([
+                $class: 'GitSCM',
+                branches: [[name: 'refs/heads/master']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: '']],
+                submoduleCfg: [],
+                userRemoteConfigs: [[credentialsId: '',
+									url: '']]
+				])
+            }
+        }
+        stage('') {
+            steps {
+
+            }
+        }
+	}
+	post {
+        always {
+
+            cleanWs()
+        }
+    }
+}
