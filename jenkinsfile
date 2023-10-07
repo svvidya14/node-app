@@ -42,8 +42,8 @@ pipeline {
                                      #!/bin/bash -ex
                                      container_id=$(docker ps | grep vidya | awk '{print $1}') 
                                     ''').trim()
-		    echo "container id =${CONTAINER_ID}"
-                    if ("${CONTAINER_ID}") {
+		    echo "container id = ${CONTAINER_ID}"
+                    if ("${CONTAINER_ID}" > 0 ) {
                           echo "container id inside if =${CONTAINER_ID}"
                           sh "docker stop ${CONTAINER_ID}"
                     }
