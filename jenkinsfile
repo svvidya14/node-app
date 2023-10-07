@@ -14,7 +14,7 @@ pipeline {
                 $class: 'GitSCM',
                 branches: [[name: 'refs/heads/main']],
                 doGenerateSubmoduleConfigurations: false,
-                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: node-app'']],
+                extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'node-app']],
                 submoduleCfg: [],
                 userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/svvidya14/node-app.git']]
 		])
