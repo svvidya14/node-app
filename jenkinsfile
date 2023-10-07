@@ -43,7 +43,7 @@ pipeline {
                                      container_id=$(docker ps | grep vidya | awk '{print $1}') 
                                     ''').trim()
 
-                    if (${CONTAINER_ID}) {
+                    if ("${CONTAINER_ID}") {
                           sh "docker stop ${CONTAINER_ID}"
                     }
 
