@@ -30,5 +30,27 @@ pipeline {
                 }
             }
         }
+	stage ('deploy in app-node') {
+	    agent { 
+                label 'app-node'
+            }
+             steps {
+		script{
+                    CONTAINER_ID = sh(
+                                     returnStdout: true,
+                                     script: '''
+                                     #!/bin/bash -ex
+                                     container_id=$(docker ps | grep vidya | awk '{print $1}') 
+                                    ''').trim()
+
+                    if (${CONTAINER_ID}) {
+                          sh "docker stop ${CONTAINER_ID}"
+                    }
+
+                    sh "docker pull 642847462334.dkr.ecr.us-east-1.amazonaws.com/vidya:v1"
+                    sh "docker run -itd -p 8090:8081 642847462334.dkr.ecr.us-east-1.amazonaws.com/vidya:v1"
+                }
+            }
+	}
     }
 }
