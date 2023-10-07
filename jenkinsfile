@@ -36,7 +36,7 @@ pipeline {
             }
              steps {
 		script{
-                    def containerId = sh(script: 'docker ps | grep vidya | awk \'{print $1}\'', returnStatus: true).trim()
+                    def containerId = sh(script: $(docker ps | grep vidya | awk '{print $1}'), returnStatus: true).trim()
 		    echo "container id = ${containerId}"
                     if (containerId) {
                           echo "container id inside if =${containerId}"
